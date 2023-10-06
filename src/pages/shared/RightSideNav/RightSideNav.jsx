@@ -1,6 +1,9 @@
 
 import { AiOutlineGoogle, AiOutlineGithub } from 'react-icons/ai';
 import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa6';
+import qzon1 from '../../../assets/qZone1.png'
+import qzon2 from '../../../assets/qZone2.png'
+import qzon3 from '../../../assets/qZone3.png'
 
 
 const RightSideNav = () => {
@@ -43,6 +46,17 @@ const RightSideNav = () => {
                 </div>
 
             </div>
+
+            {/* q zone added */}
+            <div className='p-4 mb-6 bg-zinc-600 rounded-md'>
+                <h2 className="text-lg font-semibold mb-1">Q-Zone</h2>
+                <div className='flex flex-col gap-4 my-4 justify-center items-center'>
+                    <img className='w-2/3' src={qzon1} alt="" />
+                    <img className='w-2/3' src={qzon2} alt="" />
+                    <img className='w-2/3' src={qzon3} alt="" />
+                </div>
+            </div>
+
         </div>
     );
 };
