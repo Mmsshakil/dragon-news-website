@@ -5,7 +5,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 
 const Register = () => {
 
-    // aikhane amra useContext ar modho diya AuthContext thake createUser take nisi
+    //5. aikhane amra useContext ar modho diya AuthContext thake createUser take nisi
     const { createUser } = useContext(AuthContext);
 
 
@@ -27,7 +27,7 @@ const Register = () => {
         // console.log(email, password);
 
 
-        // create user
+        //6. create user
         // createUser thake niya asa functon diya user create korbo
         // createuser auth soho cole asca sodho email, pass pathaite hbe akhn
         createUser(email, password)

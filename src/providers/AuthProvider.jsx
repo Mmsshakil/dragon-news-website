@@ -8,11 +8,12 @@ export const AuthContext = createContext(null);
 const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
+    // 2. user change hobe bar bar registration ar somoy tai usestate disi
     const [user, setUser] = useState(null);
 
 
 
-    // aikhane auth, email, password niya firebase ar createUser re call kore dibe and seta return kore dibo
+    // 3. aikhane auth, email, password niya firebase ar createUser re call kore dibe and seta return kore dibo
     // ai user to direct register a jaite parbena tai amra aita abr authinfo te pathay dibo jate sob jay thake use korte pari
     const createUser = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password)
@@ -20,7 +21,7 @@ const AuthProvider = ({ children }) => {
     }
 
 
-    // aikhane authinfo ar vitore ja ja dibo ta akhn sob jayga thake use korte parbo
+    //4. aikhane authinfo ar vitore ja ja dibo ta akhn sob jayga thake use korte parbo
     const authInfo = {
         user,
         // aikhane createUser disi karon jate createUser function ta sob jayga thake access korte pari
