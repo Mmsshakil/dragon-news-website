@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
 import Navbar from "../shared/Navbar/Navbar";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Register = () => {
+
+    // aikhane amra useContext ar modho diya AuthContext thake createUser take nisi
+    const { createUser } = useContext(AuthContext);
+
 
     const handleRegister = e => {
         e.preventDefault();
@@ -14,11 +20,24 @@ const Register = () => {
         const email = form.get('email');
         const password = form.get('password');
 
-        console.log(name,photo,email, password);
+        console.log(name, photo, email, password);
 
         // const email = e.target.email.value;
         // const password = e.target.password.value;
         // console.log(email, password);
+
+
+        // create user
+        // createUser thake niya asa functon diya user create korbo
+        // createuser auth soho cole asca sodho email, pass pathaite hbe akhn
+        createUser(email, password)
+        .then(result =>{
+            console.log(result.user);
+        })
+        .catch(error =>{
+            console.log(error.message);
+        })
+
     }
 
     return (
@@ -26,7 +45,7 @@ const Register = () => {
             <Navbar></Navbar>
             <div className="w-full md:w-2/3 lg:w-1/2 p-20 text-black mx-auto bg-slate-300 ">
                 <h2 className="text-center text-3xl font-semibold">Register your account</h2>
-                <form  onSubmit={handleRegister}>
+                <form onSubmit={handleRegister}>
                     <div className="form-control mb-3">
                         <label className="label">
                             <span className="label-text text-black">Your Name</span>
