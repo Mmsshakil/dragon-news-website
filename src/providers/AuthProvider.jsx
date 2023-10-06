@@ -11,22 +11,28 @@ const AuthProvider = ({ children }) => {
     // 2. user change hobe bar bar registration ar somoy tai usestate disi
     const [user, setUser] = useState(null);
 
+    // for loading probelm we set this
+    const [loading, setLoading] = useState(true);
+
 
 
     // 3. aikhane auth, email, password niya firebase ar createUser re call kore dibe and seta return kore dibo
     // ai user to direct register a jaite parbena tai amra aita abr authinfo te pathay dibo jate sob jay thake use korte pari
     const createUser = (email, password) => {
+        setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password)
 
     }
 
     // 8. logout korbo
     const logOut = () => {
+        setLoading(true);
         return signOut(auth);
     }
 
 
-    const signIn = (email, password) =>{
+    const signIn = (email, password) => {
+        setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     }
 
@@ -34,16 +40,18 @@ const AuthProvider = ({ children }) => {
     // 7. ai part ta soja mokhosto
     // aita use korsi karon jate refresh dilao data gola sob jayga thake use korte pari
     useEffect(() => {
-        
-      const unSubscribe =  onAuthStateChanged(auth, currentUser => {
+
+        const unSubscribe = onAuthStateChanged(auth, currentUser => {
+            
             console.log('User in the auth state change', currentUser);
             setUser(currentUser);
-            
+            setLoading(false);
+
         });
         return () => {
             unSubscribe();
         }
-        
+
 
     }, [])
     // ----------------------------------------------------------------------------------
@@ -55,7 +63,8 @@ const AuthProvider = ({ children }) => {
         // aikhane createUser disi karon jate createUser function ta sob jayga thake access korte pari
         createUser,
         logOut,
-        signIn
+        signIn,
+        loading
     }
 
     return (
