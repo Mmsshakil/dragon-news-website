@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import app from "../firbase/firbase.config";
 
 // 1. here we create auth context
@@ -23,6 +23,11 @@ const AuthProvider = ({ children }) => {
     // 8. logout korbo
     const logOut = () => {
         return signOut(auth);
+    }
+
+
+    const signIn = (email, password) =>{
+        return signInWithEmailAndPassword(auth, email, password);
     }
 
     // --------------------------------------------------------------------------------
@@ -49,7 +54,8 @@ const AuthProvider = ({ children }) => {
         user,
         // aikhane createUser disi karon jate createUser function ta sob jayga thake access korte pari
         createUser,
-        logOut
+        logOut,
+        signIn
     }
 
     return (
