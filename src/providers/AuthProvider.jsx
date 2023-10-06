@@ -1,5 +1,5 @@
-import { createContext, useState } from "react";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { createContext, useEffect, useState } from "react";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import app from "../firbase/firbase.config";
 
 // 1. here we create auth context
@@ -20,12 +20,36 @@ const AuthProvider = ({ children }) => {
 
     }
 
+    // 8. logout korbo
+    const logOut = () => {
+        return signOut(auth);
+    }
+
+    // --------------------------------------------------------------------------------
+    // 7. ai part ta soja mokhosto
+    // aita use korsi karon jate refresh dilao data gola sob jayga thake use korte pari
+    useEffect(() => {
+        
+      const unSubscribe =  onAuthStateChanged(auth, currentUser => {
+            console.log('User in the auth state change', currentUser);
+            setUser(currentUser);
+            
+        });
+        return () => {
+            unSubscribe();
+        }
+        
+
+    }, [])
+    // ----------------------------------------------------------------------------------
+
 
     //4. aikhane authinfo ar vitore ja ja dibo ta akhn sob jayga thake use korte parbo
     const authInfo = {
         user,
         // aikhane createUser disi karon jate createUser function ta sob jayga thake access korte pari
-        createUser
+        createUser,
+        logOut
     }
 
     return (
