@@ -35,7 +35,7 @@ const Navbar = () => {
                         <img src={user} />
                     </div>
                 </label>
-                <Link>
+                <Link to="/login">
                     {/* <img className='w-10 rounded-full' src={user} alt="" /> */}
                     <button className='btn'>Login</button>
                 </Link>
